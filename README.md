@@ -1,6 +1,7 @@
 # Sensirion I2C STCC4 embedded Library
 
-This document explains how to set up a STCC4 sensor to run on an embedded device using the I²C interface.
+This document explains how to set up a STCC4 sensor
+to run on an embedded device using the I²C interface.
 
 <img src="images/STCC4.png" width="300px">
 
