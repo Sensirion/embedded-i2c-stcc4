@@ -17,17 +17,17 @@ The default I²C address of [STCC4](https://sensirion.com/products/catalog/STCC4
 
 ### Connect the Sensor
 
-Your sensor has 4 pins that need to be connected to your board: SCL, GND, VDD, SDA.
+Your sensor has 4 pins that need to be connected to your board: GND, VDD, SDA, SCL.
 Use the following description to connect your STCC4:
 
 <img src="images/STCC4_pinout.png" width="300px">
 
 | *Pin* | *Cable Color* | *Name* | *Description*  | *Comments* |
 |-------|---------------|:------:|----------------|------------|
-| 1 | yellow | SCL | I2C: Serial clock input |
-| 2 | black | GND | Ground |
-| 3 | red | VDD | Supply Voltage | 3.3V
-| 4 | green | SDA | I2C: Serial data input / output |
+| 1 | black | GND | Ground |
+| 2 | red | VDD | Supply Voltage | 2.7V to 5.5V
+| 3 | green | SDA | I2C: Serial data input / output |
+| 4 | yellow | SCL | I2C: Serial clock input |
 
 
 

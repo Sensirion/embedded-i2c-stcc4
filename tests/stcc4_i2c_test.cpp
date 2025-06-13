@@ -3,7 +3,7 @@
  *
  * Generator:     sensirion-driver-generator 1.2.0
  * Product:       stcc4
- * Model-Version: 3.2.0
+ * Model-Version: 3.3.0
  */
 
 #include "sensirion_common.h"
@@ -68,12 +68,6 @@ TEST (STCC4_Tests, test_stop_continuous_measurement1) {
     int16_t local_error = 0;
     local_error = stcc4_stop_continuous_measurement();
     CHECK_EQUAL_ZERO_TEXT(local_error, "stop_continuous_measurement");
-}
-
-TEST (STCC4_Tests, test_reinit1) {
-    int16_t local_error = 0;
-    local_error = stcc4_reinit();
-    CHECK_EQUAL_ZERO_TEXT(local_error, "reinit");
 }
 
 TEST (STCC4_Tests, test_start_continuous_measurement1) {

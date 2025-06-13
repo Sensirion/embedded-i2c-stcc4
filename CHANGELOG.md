@@ -7,5 +7,5 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ### Added
 
-- Support STCC4 I2C interfaces as described in Datasheet.
+- Initial support for STCC4.
 
