@@ -3,7 +3,7 @@
  *
  * Generator:     sensirion-driver-generator 1.2.0
  * Product:       stcc4
- * Model-Version: 3.2.0
+ * Model-Version: 3.3.0
  */
 /*
  * Copyright (c) 2025, Sensirion AG
@@ -126,18 +126,18 @@ int16_t stcc4_measure_single_shot() {
     if (local_error != NO_ERROR) {
         return local_error;
     }
-    sensirion_i2c_hal_sleep_usec(350 * 1000);
+    sensirion_i2c_hal_sleep_usec(500 * 1000);
     return local_error;
 }
 
-int16_t stcc4_perform_forced_recalibration(uint16_t target_co2_concentration,
-                                           uint16_t* frc_correction) {
+int16_t stcc4_perform_forced_recalibration(int16_t target_co2_concentration,
+                                           int16_t* frc_correction) {
     int16_t local_error = NO_ERROR;
     uint8_t* buffer_ptr = communication_buffer;
     uint16_t local_offset = 0;
     local_offset =
         sensirion_i2c_add_command16_to_buffer(buffer_ptr, local_offset, 0x362f);
-    local_offset = sensirion_i2c_add_uint16_t_to_buffer(
+    local_offset = sensirion_i2c_add_int16_t_to_buffer(
         buffer_ptr, local_offset, target_co2_concentration);
     local_error =
         sensirion_i2c_write_data(_i2c_address, buffer_ptr, local_offset);
@@ -149,7 +149,7 @@ int16_t stcc4_perform_forced_recalibration(uint16_t target_co2_concentration,
     if (local_error != NO_ERROR) {
         return local_error;
     }
-    *frc_correction = sensirion_common_bytes_to_uint16_t(&buffer_ptr[0]);
+    *frc_correction = sensirion_common_bytes_to_int16_t(&buffer_ptr[0]);
     return local_error;
 }
 
@@ -318,20 +318,5 @@ int16_t stcc4_perform_factory_reset(uint16_t* factory_reset_result) {
         return local_error;
     }
     *factory_reset_result = sensirion_common_bytes_to_uint16_t(&buffer_ptr[0]);
-    return local_error;
-}
-
-int16_t stcc4_reinit() {
-    int16_t local_error = NO_ERROR;
-    uint8_t* buffer_ptr = communication_buffer;
-    uint16_t local_offset = 0;
-    local_offset =
-        sensirion_i2c_add_command16_to_buffer(buffer_ptr, local_offset, 0x3646);
-    local_error =
-        sensirion_i2c_write_data(_i2c_address, buffer_ptr, local_offset);
-    if (local_error != NO_ERROR) {
-        return local_error;
-    }
-    sensirion_i2c_hal_sleep_usec(10 * 1000);
     return local_error;
 }

@@ -3,7 +3,7 @@
  *
  * Generator:     sensirion-driver-generator 1.2.0
  * Product:       stcc4
- * Model-Version: 3.2.0
+ * Model-Version: 3.3.0
  */
 /*
  * Copyright (c) 2025, Sensirion AG
@@ -62,7 +62,6 @@ typedef enum {
     STCC4_ENABLE_TESTING_MODE_CMD_ID = 0x3fbc,
     STCC4_DISABLE_TESTING_MODE_CMD_ID = 0x3f3d,
     STCC4_PERFORM_FACTORY_RESET_CMD_ID = 0x3632,
-    STCC4_REINIT_CMD_ID = 0x3646,
 } STCC4_CMD_ID;
 
 /**
@@ -186,8 +185,8 @@ int16_t stcc4_measure_single_shot();
  *
  * @return error_code 0 on success, an error code otherwise.
  */
-int16_t stcc4_perform_forced_recalibration(uint16_t target_co2_concentration,
-                                           uint16_t* frc_correction);
+int16_t stcc4_perform_forced_recalibration(int16_t target_co2_concentration,
+                                           int16_t* frc_correction);
 
 /**
  * @brief Read the sensor's 32-bit product id and 64-bit serial number.
@@ -356,17 +355,6 @@ int16_t stcc4_disable_testing_mode();
  * @return error_code 0 on success, an error code otherwise.
  */
 int16_t stcc4_perform_factory_reset(uint16_t* factory_reset_result);
-
-/**
- * @brief Reinitializes the sensor.
- *
- * The reinit command reinitializes the sensor by reloading settings from the
- * EEPROM. The sensor must be in the idle state before sending the reinit
- * command
- *
- * @return error_code 0 on success, an error code otherwise.
- */
-int16_t stcc4_reinit();
 
 #ifdef __cplusplus
 }
