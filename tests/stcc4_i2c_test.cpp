@@ -3,7 +3,7 @@
  *
  * Generator:     sensirion-driver-generator 1.2.0
  * Product:       stcc4
- * Model-Version: 3.3.0
+ * Model-Version: 3.4.0
  */
 
 #include "sensirion_common.h"

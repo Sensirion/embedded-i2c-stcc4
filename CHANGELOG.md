@@ -5,7 +5,11 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased] 
 
+## [1.0.0] - 2025-6-20
+
 ### Added
 
 - Initial support for STCC4.
 
+[Unreleased]: https://github.com/Sensirion/embedded-i2c-stcc4/compare/1.0.0...HEAD
+[1.0.0]: https://github.com/Sensirion/embedded-i2c-stcc4/releases/tag/1.0.0
