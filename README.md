@@ -8,6 +8,9 @@ to run on an embedded device using the I²C interface.
 Click [here](https://sensirion.com/products/catalog/STCC4) to learn more about the Sensirion STCC4 sensor.
 
 
+The STCC4 is Sensirion's next generation miniature CO2 sensor for indoor air quality applications.
+
+
 
 The default I²C address of [STCC4](https://sensirion.com/products/catalog/STCC4) is **0x64**.
 
