@@ -117,7 +117,7 @@ int16_t stcc4_read_measurement_raw(int16_t* co2_concentration_raw,
     return local_error;
 }
 
-int16_t stcc4_stop_continuous_measurement(void) {
+int16_t stcc4_stop_continuous_measurement_nowait(void) {
     int16_t local_error = NO_ERROR;
     uint8_t* buffer_ptr = communication_buffer;
     uint16_t local_offset = 0;
@@ -126,6 +126,11 @@ int16_t stcc4_stop_continuous_measurement(void) {
         buffer_ptr, local_offset, STCC4_STOP_CONTINUOUS_MEASUREMENT_CMD_ID);
     local_error =
         sensirion_i2c_write_data(_i2c_address, buffer_ptr, local_offset);
+    return local_error;
+}
+
+int16_t stcc4_stop_continuous_measurement(void) {
+    int16_t local_error = stcc4_stop_continuous_measurement_nowait();
     if (local_error != NO_ERROR) {
         return local_error;
     }
@@ -133,7 +138,7 @@ int16_t stcc4_stop_continuous_measurement(void) {
     return local_error;
 }
 
-int16_t stcc4_measure_single_shot(void) {
+int16_t stcc4_measure_single_shot_nowait(void) {
     int16_t local_error = NO_ERROR;
     uint8_t* buffer_ptr = communication_buffer;
     uint16_t local_offset = 0;
@@ -142,6 +147,11 @@ int16_t stcc4_measure_single_shot(void) {
         buffer_ptr, local_offset, STCC4_MEASURE_SINGLE_SHOT_CMD_ID);
     local_error =
         sensirion_i2c_write_data(_i2c_address, buffer_ptr, local_offset);
+    return local_error;
+}
+
+int16_t stcc4_measure_single_shot(void) {
+    int16_t local_error = stcc4_measure_single_shot_nowait();
     if (local_error != NO_ERROR) {
         return local_error;
     }
@@ -272,7 +282,7 @@ int16_t stcc4_perform_conditioning(void) {
     return local_error;
 }
 
-int16_t stcc4_enter_sleep_mode(void) {
+int16_t stcc4_enter_sleep_mode_nowait(void) {
     int16_t local_error = NO_ERROR;
     uint8_t* buffer_ptr = communication_buffer;
     uint16_t local_offset = 0;
@@ -281,6 +291,11 @@ int16_t stcc4_enter_sleep_mode(void) {
         buffer_ptr, local_offset, STCC4_ENTER_SLEEP_MODE_CMD_ID);
     local_error =
         sensirion_i2c_write_data(_i2c_address, buffer_ptr, local_offset);
+    return local_error;
+}
+
+int16_t stcc4_enter_sleep_mode(void) {
+    int16_t local_error = stcc4_enter_sleep_mode_nowait();
     if (local_error != NO_ERROR) {
         return local_error;
     }
@@ -288,7 +303,7 @@ int16_t stcc4_enter_sleep_mode(void) {
     return local_error;
 }
 
-int16_t stcc4_exit_sleep_mode(void) {
+int16_t stcc4_exit_sleep_mode_nowait(void) {
     int16_t local_error = NO_ERROR;
     uint8_t* buffer_ptr = communication_buffer;
     uint16_t local_offset = 0;
@@ -296,6 +311,11 @@ int16_t stcc4_exit_sleep_mode(void) {
     local_offset = sensirion_i2c_add_command8_to_buffer(
         buffer_ptr, local_offset, STCC4_EXIT_SLEEP_MODE_CMD_ID);
     sensirion_i2c_write_data(_i2c_address, buffer_ptr, local_offset);
+    return local_error;
+}
+
+int16_t stcc4_exit_sleep_mode(void) {
+    int16_t local_error = stcc4_exit_sleep_mode_nowait();
     sensirion_i2c_hal_sleep_usec(5 * 1000);
     return local_error;
 }

@@ -151,6 +151,22 @@ int16_t stcc4_read_measurement_raw(int16_t* co2_concentration_raw,
 int16_t stcc4_stop_continuous_measurement(void);
 
 /**
+ * @brief The command stops the continuous measurement and puts the sensor into
+ * idle mode. Does not wait for execution time.
+ *
+ * After receiving the stop_continuous_measurement command, the sensor will
+ * finish the currently running measurement before returning to idle mode.
+ * Therefore, a wait time of one measurement interval plus a 200 ms clock
+ * tolerance is required before a new command is acknowledged.
+ *
+ * Unlike stcc4_stop_continuous_measurement(), it's up to the caller to wait for
+ * the 1200 ms execution time.
+ *
+ * @return error_code 0 on success, an error code otherwise.
+ */
+int16_t stcc4_stop_continuous_measurement_nowait(void);
+
+/**
  * @brief Performs a single shot measurement.
  *
  * The measure_single_shot command conducts an on-demand measurement of CO2 gas
@@ -165,6 +181,25 @@ int16_t stcc4_stop_continuous_measurement(void);
  * @return error_code 0 on success, an error code otherwise.
  */
 int16_t stcc4_measure_single_shot(void);
+
+/**
+ * @brief Performs a single shot measurement. Does not wait for execution time.
+ *
+ * The measure_single_shot command conducts an on-demand measurement of CO2 gas
+ * concentration. The typical communication sequence is as follows: 1. The
+ * sensor is powered up with the exit_sleep_mode command if previously powered
+ * down using the enter_sleep_mode command. 2. The I2C controller sends a
+ * measure_single_shot command and waits for the execution time. 3. The I2C
+ * controller reads out data with the read_measurement command. 4. Repeat steps
+ * 2-3 as required by the application. 5. If desired, set the sensor to sleep
+ * with the enter_sleep_mode command.
+ *
+ * Unlike stcc4_measure_single_shot(), it's up to the caller to wait
+ * for the 500 ms execution time.
+ *
+ * @return error_code 0 on success, an error code otherwise.
+ */
+int16_t stcc4_measure_single_shot_nowait(void);
 
 /**
  * @brief Perform a forced recalibration (FRC) of the CO₂ concentration.
@@ -321,6 +356,22 @@ int16_t stcc4_perform_conditioning(void);
 int16_t stcc4_enter_sleep_mode(void);
 
 /**
+ * @brief Sets the sensor from idle mode into sleep mode. Does not
+ * wait for execution time.
+ *
+ * The enter_sleep_mode command sets the sensor to sleep mode through the I2C
+ * interface. The written relative humidity, temperature, and pressure
+ * compensation values as well as the ASC state will be retained while in sleep
+ * mode.
+ *
+ * Unlike stcc4_enter_sleep_mode(), it's up to the caller to wait for
+ * the 1 ms execution time.
+ *
+ * @return error_code 0 on success, an error code otherwise.
+ */
+int16_t stcc4_enter_sleep_mode_nowait(void);
+
+/**
  * @brief The sensor is set from sleep mode into idle mode when it receives the
  * valid I²C address and a write bit (‘0’).
  *
@@ -331,6 +382,21 @@ int16_t stcc4_enter_sleep_mode(void);
  * @return error_code 0 on success, an error code otherwise.
  */
 int16_t stcc4_exit_sleep_mode(void);
+
+/**
+ * @brief The sensor is set from sleep mode into idle mode when it receives the
+ * valid I²C address and a write bit (‘0’). Does not wait for execution time.
+ *
+ * The exit_sleep_mode command sets the sensor to idle mode through the I2C
+ * interface. The sensor's idle state can be verified by reading out the product
+ * ID.
+ *
+ * Unlike stcc4_exit_sleep_mode(), it's up to the caller to wait for
+ * the 5 ms execution time.
+ *
+ * @return error_code 0 on success, an error code otherwise.
+ */
+int16_t stcc4_exit_sleep_mode_nowait(void);
 
 /**
  * @brief Enable the sensor testing mode.
